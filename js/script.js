@@ -79,7 +79,6 @@ function printQuote(div){
     div.innerHTML = quoteSource; 
     div.style.background = getRandomColor();
   }
-document.write(printQuote());
 
 // Create a link to load quote
 
