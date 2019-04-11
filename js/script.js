@@ -41,6 +41,30 @@ let quotes = [
     year: 2017
   },
   {
+    quote: 'No one can make you feel inferior without your consent.',
+    source: 'Eleanor Roosevelt',
+    citation: 'This is My Story',
+    year: 1939
+  },
+  {
+    quote: 'Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.',
+    source: 'Martin Luther King Jr.',
+    citation: 'A Testament of Hope: The Essential Writings and Speeches',
+    year: 1986
+  },
+  {
+    quote: "Without music, life would be a mistake.",
+    source: 'Friedrich Nietzsche',
+    citation: 'Twilight of the Idols',
+    year: 1889
+  },
+  {
+    quote: 'Live as if you were to die tomorrow. Learn as if you were to live forever.',
+    source: 'Mahatma Gandhi',
+    citation: '',
+    year: ''
+  },
+  {
     quote: 'Get busy living, or get busy dying',
     source: 'Tim Robbins',
     citation: 'as Andy Dufresne in The Shawshank Redemption',
@@ -57,29 +81,40 @@ function getRandomQuote(){
   return quotes[randomNum];
 }
 
-function getRandomColor(){
-  var randomColor = Math.floor(Math.random * 256) +1;
-  var backGround = 'rgb(' + randomColor + ', ' + randomColor + ', ' + randomColor + ')';
-  return backGround;
-}
-
 // Create a function to print quotes
 
-function printQuote(div){
+function printQuote(){
   var k = getRandomQuote();
-  var quoteSource = '<p class="quote">'+ k.quote + '</p>';
-      quoteSource += '<p class="source">' + k.source; 
+  var completeQuote = '<p class="quote">'+ k.quote + '</p>';
+      completeQuote += '<p class="source">' + k.source; 
       if (k.citation !== ''){
-      quoteSource += ' <span class="citation">' + k.citation + '</span>';
+      completeQuote += ' <span class="citation">' + k.citation + '</span>';
       }
       if (k.year !== ''){
-      quoteSource +=  ' <span class="year">' + k.year + '</span></p>';
+      completeQuote +=  ' <span class="year">' + k.year + '</span></p>';
       }
-  var div = document.getElementById('quote-box');
-    div.innerHTML = quoteSource; 
-    div.style.background = getRandomColor();
+  var quoteBox = document.getElementById('quote-box');
+    quoteBox.innerHTML = completeQuote; 
   }
 
-// Create a link to load quote
+// Automatically change the quote after 5s
+
+setInterval(printQuote,5000);
+
+// Create an array contains some background colors
+
+let color = ['pink', 'grey', 'black', 'purple', 'rgb(147,196,125)', 'rgb(69,129,142)', 'rgb(191,144,0)','rgb(224,102,102)', 'rgb(194,123,160)', 'rgb(19,79,92)'];
+
+// Create a function to get random background colors and link with body tag
+
+function changeBackground(){
+  document.getElementsByTagName('body')[0].style.background = color[Math.floor(Math.random() * color.length)];
+}
+
+// Automatically change the background color after 5s
+
+setInterval(changeBackground, 5000);
+
+// Create a link to load quote and change quote when clicking
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
